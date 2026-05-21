@@ -1,0 +1,149 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: futsal-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=haxball
+      - POSTGRES_USER=haxball
+      - POSTGRES_PASSWORD=haxball123
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      botnet:
+        ipv4_address: 172.20.0.5
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U haxball"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  bot1:
+    build: .
+    container_name: futsal-bot1
+    restart: unless-stopped
+    environment:
+      - BOT_ID=bot1
+      - ROOM_NAME=Futsal Acemi 1
+      - DATABASE_URL=postgresql://haxball:haxball123@postgres:5432/haxball
+    volumes:
+      - ./data/shared:/app/data/shared
+      - ./data/tokens:/app/data/tokens
+      - ./logs/bot1:/app/logs
+      - ./bots.json:/app/bots.json:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      botnet:
+        ipv4_address: 172.20.0.11
+
+  bot2:
+    build: .
+    container_name: futsal-bot2
+    restart: unless-stopped
+    environment:
+      - BOT_ID=bot2
+      - ROOM_NAME=Futsal Acemi 2
+      - DATABASE_URL=postgresql://haxball:haxball123@postgres:5432/haxball
+    volumes:
+      - ./data/shared:/app/data/shared
+      - ./data/tokens:/app/data/tokens
+      - ./logs/bot2:/app/logs
+      - ./bots.json:/app/bots.json:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      botnet:
+        ipv4_address: 172.20.0.12
+
+  bot3:
+    build: .
+    container_name: futsal-bot3
+    restart: unless-stopped
+    environment:
+      - BOT_ID=bot3
+      - ROOM_NAME=Futsal Orta 3
+      - DATABASE_URL=postgresql://haxball:haxball123@postgres:5432/haxball
+    volumes:
+      - ./data/shared:/app/data/shared
+      - ./data/tokens:/app/data/tokens
+      - ./logs/bot3:/app/logs
+      - ./bots.json:/app/bots.json:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      botnet:
+        ipv4_address: 172.20.0.13
+
+  bot4:
+    build: .
+    container_name: futsal-bot4
+    restart: unless-stopped
+    environment:
+      - BOT_ID=bot4
+      - ROOM_NAME=Futsal HP 5
+      - DATABASE_URL=postgresql://haxball:haxball123@postgres:5432/haxball
+    volumes:
+      - ./data/shared:/app/data/shared
+      - ./data/tokens:/app/data/tokens
+      - ./logs/bot4:/app/logs
+      - ./bots.json:/app/bots.json:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      botnet:
+        ipv4_address: 172.20.0.14
+
+  bot5:
+    build: .
+    container_name: futsal-bot5
+    restart: unless-stopped
+    environment:
+      - BOT_ID=bot5
+      - ROOM_NAME=Futsal Orta 4
+      - DATABASE_URL=postgresql://haxball:haxball123@postgres:5432/haxball
+    volumes:
+      - ./data/shared:/app/data/shared
+      - ./data/tokens:/app/data/tokens
+      - ./logs/bot5:/app/logs
+      - ./bots.json:/app/bots.json:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      botnet:
+        ipv4_address: 172.20.0.15
+
+  bot6:
+    build: .
+    container_name: futsal-bot6
+    restart: unless-stopped
+    environment:
+      - BOT_ID=bot6
+      - ROOM_NAME=Futsal HP 6
+      - DATABASE_URL=postgresql://haxball:haxball123@postgres:5432/haxball
+    volumes:
+      - ./data/shared:/app/data/shared
+      - ./data/tokens:/app/data/tokens
+      - ./logs/bot6:/app/logs
+      - ./bots.json:/app/bots.json:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      botnet:
+        ipv4_address: 172.20.0.16
+
+volumes:
+  pgdata:
+
+networks:
+  botnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

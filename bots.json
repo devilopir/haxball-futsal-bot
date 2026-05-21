@@ -1,0 +1,30 @@
+{
+  "bot1": {
+    "roomType": "agir_acemi_1",
+    "dataGroup": "shared",
+    "proxy": ""
+  },
+  "bot2": {
+    "roomType": "agir_acemi_2",
+    "dataGroup": "shared",
+    "proxy": ""
+  },
+  "bot3": {
+    "roomType": "orta",
+    "dataGroup": "shared",
+    "proxy": ""
+  },
+  "bot4": {
+    "roomType": "hp",
+    "dataGroup": "shared",
+    "proxy": ""
+  },
+  "bot5": {
+    "roomType": "orta_2",
+    "dataGroup": "shared"
+  },
+  "bot6": {
+    "roomType": "hp_2",
+    "dataGroup": "shared"
+  }
+}

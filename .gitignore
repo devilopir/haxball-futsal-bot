@@ -1,0 +1,13 @@
+node_modules/
+recordings/
+logs/
+*.log
+.DS_Store
+.env
+.env.*
+data/
+tmp/
+.vscode/
+__pycache__/
+*.pyc
+.claude/
